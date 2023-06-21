@@ -5,14 +5,10 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 public class CreateForm {
-
-
-
     @NotEmpty(message = "名前を入力してね！！")
-    @Size(max = 13,message= "名前は１３文字以内で！！")
+    @Size(max = 13, message = "名前は１３文字以内で！！")
     private String name;
-
-    @Min(18)
+    @Min(value = 18, message = "18才未満はご利用いただけません。")
     private Integer age;
 
     public String getName() {
@@ -30,5 +26,4 @@ public class CreateForm {
     public void setAge(Integer age) {
         this.age = age;
     }
-
 }

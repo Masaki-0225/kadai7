@@ -11,10 +11,12 @@ import java.util.Map;
 @RestController
 public class UserController {
 
+    public String URL = "http://localhost:8080";
+
     @PostMapping("/names")
-    public ResponseEntity<String> create(@RequestBody CreateForm form){
+    public ResponseEntity<String> create(@RequestBody @Valid CreateForm form) {
         //登録処理は省略
-        URI url = UriComponentsBuilder.fromUriString("http://localhost:8080")
+        URI url = UriComponentsBuilder.fromUriString(URL)
                 .path("/names/id")//id部分は実際に登録された際に発行したidを設定する
                 .build()
                 .toUri();
@@ -22,20 +24,20 @@ public class UserController {
     }
 
     @GetMapping("/names")
-    public String name(@RequestParam(value = "name", defaultValue = "ぬる")String name) {
-        return "Mr." + name ;
+    public String name(@RequestParam(value = "name", defaultValue = "ぬる") String name) {
+        return "Mr." + name;
     }
 
     @PatchMapping("/names/{id}")
-    public ResponseEntity<Map<String,String>>
-    update(@PathVariable("id")int id,@RequestBody @Valid UpdateForm updateForm){
+    public ResponseEntity<Map<String, String>>
+    update(@PathVariable("id") int id, @RequestBody @Valid UpdateForm updateForm) {
         //更新処理は省略
-        return ResponseEntity.ok(Map.of("message","更新完了！！！"));
+        return ResponseEntity.ok(Map.of("message", "更新完了！！！"));
     }
 
     @DeleteMapping("names/{id}")
     public ResponseEntity<Map<String, String>> delete(@PathVariable("id") int id) {
-        return ResponseEntity.ok(Map.of("message", "name successfully deleted"));
+        return ResponseEntity.ok(Map.of("message", "削除しました！！！"));
     }
 
 }
