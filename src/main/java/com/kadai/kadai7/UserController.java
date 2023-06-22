@@ -11,12 +11,11 @@ import java.util.Map;
 @RestController
 public class UserController {
 
-    public String URL = "http://localhost:8080";
-
     @PostMapping("/names")
-    public ResponseEntity<String> create(@RequestBody @Valid CreateForm form) {
+    public ResponseEntity<String> create(
+            @RequestBody @Valid CreateForm form, UriComponentsBuilder uriBuilder) {
         //登録処理は省略
-        URI url = UriComponentsBuilder.fromUriString(URL)
+        URI url = uriBuilder
                 .path("/names/id")//id部分は実際に登録された際に発行したidを設定する
                 .build()
                 .toUri();
